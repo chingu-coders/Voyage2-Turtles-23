@@ -21,4 +21,6 @@ Please read [CONTRIBUTING.md](https://github.com/chingu-coders/Voyage2-Turtles-2
 * **Maks Ushakov** - [@maks-ushakov](https://github.com/maks-ushakov)
 * **Bonface Mudiri** - [@iambonface](https://github.com/iambonface)
 
+## License
 
+[MIT](LICENSE) © Chingu Coders
