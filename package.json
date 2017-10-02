@@ -4,7 +4,11 @@
   "description": "Next Tab Extension for Chrome",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "ext:build": "gulp build",
+    "dev": "gulp dev",
+    "gulp": "gulp",
+    "test": "mocha",
+    "test:watch": "mocha --watch"
   },
   "repository": {
     "type": "git",
