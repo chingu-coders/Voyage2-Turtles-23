@@ -1,5 +1,5 @@
 'use strict'
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     watch = require('gulp-watch'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -8,7 +8,12 @@ var gulp = require('gulp'),
     webpack = require('webpack'),
     uglify = require('gulp-uglify'),
     mincss = require('gulp-minify-css'),
-    del = require('del');
+    del = require('del'),
+    notify = require('gulp-notify'),
+    combine = require('stream-combiner2').obj,
+    ospath = require('path'),
+    notifier = require('node-notifier'),
+    gulplog = require('gulp-log');
 
 var path = {
     src: {
@@ -26,7 +31,11 @@ var path = {
         icons: 'next-tab/',
         html: 'next-tab/',
         style: 'next-tab/',
-        js: 'next-tab/app.bundle.js',
+        js: {
+            filename: 'app.bundle.js',
+            path: ospath.resolve(__dirname,'next-tab')
+        
+        },
         manifest: 'next-tab/'
     },
     watch: {
@@ -41,38 +50,98 @@ var path = {
 var isDev = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 
 gulp.task('html', function(callback) {
-    return gulp.src(path.src.html)
-    .pipe(rigger())
-    .pipe(gulp.dest(path.build.html));
+    return combine(
+        gulp.src(path.src.html),
+        rigger(),
+        gulp.dest(path.build.html))
+    .on('error', notify.onError());
 
 });
 
 gulp.task('styles', function(callback) {
-    return gulp.src(path.src.style)
-    .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(prefixer())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(path.build.style));
+    return combine(
+        gulp.src(path.src.style),
+        sourcemaps.init(),
+        sass(),
+        prefixer(),
+        sourcemaps.write(),
+        gulp.dest(path.build.style))
+        .on('error', notify.onError(function(error) {
+            return {
+                title: 'Styles Error',
+                message: error.message
+            };
+        }));
 });
 
 gulp.task('scripts', function(callback) {
-    return gulp.src(path.src.js)
-    .pipe(gulp.dest(path.build.js));
+    const options = {
+        entry: './' + path.src.js,
+        output: {
+            filename: path.build.js.filename,
+            path: path.build.js.path
+        },
+        watch: isDev,
+        devtool: isDev ? 'source-map': null,
+        module: {
+            loaders: [
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader'
+                }
+            ]
+        },
+        plugins: [
+            new webpack.NoErrorsPlugin()
+        ]
+    };
+
+    if(!isDev) {
+        options.plugin.push(
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warning: false,
+                    unsafe: true
+                }
+            })
+        )
+    }
+    webpack(options, function(error, stats) {
+        if (!error) { // no hard error
+            //try to get a soft error
+            error = stats.toJson().errors[0];
+        }
+
+        if (error) {
+            notifier.notify({
+                title: 'Webpack',
+                message: error
+            });
+            //gulplog.error(error);
+        } else {
+            //gulplog.info(stats.toString({colors: true}));
+        }
+
+        if(!options.watch && error) {
+            callback(error);
+        } else {
+            callback()
+        }
+    });
 });
 
 gulp.task('icons', function(callback) {
-    return gulp.src(path.src.icons)
+    return gulp.src(path.src.icons, {since: gulp.lastRun('icons')})
     .pipe(gulp.dest(path.build.icons));
 });
 
 gulp.task('fonts', function(callback) {
-    return gulp.src(path.src.fonts)
+    return gulp.src(path.src.fonts, {since: gulp.lastRun('fonts')})
     .pipe(gulp.dest(path.build.fonts));
 });
 
 gulp.task('images', function() {
-    return gulp.src(path.src.images)
+    return gulp.src(path.src.images, {since: gulp.lastRun('images')})
     .pipe(gulp.dest(path.build.images));
 });
 
