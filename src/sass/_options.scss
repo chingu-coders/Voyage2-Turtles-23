@@ -1,0 +1,9 @@
+.toggle-options {
+    grid-area: bottom-l;
+}
+
+#options {
+    &:taget {
+        left: 0;
+    }
+}
