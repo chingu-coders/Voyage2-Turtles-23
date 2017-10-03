@@ -37,7 +37,7 @@ const options = {
         show: true
     },
 
-    get: (optionName) => this[optionName],
+    get: (optionName) => {},
     load: () => {}
 };
 
