@@ -8,3 +8,4 @@ options.load();
 
 weather(options.get(weather));
 
+//clock($('#clock'), options);
