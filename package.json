@@ -7,8 +7,11 @@
     "ext:build": "NODE_ENV=production gulp ext:build",
     "dev": "gulp dev",
     "gulp": "gulp",
+    "lint": "gulp lint:js",
     "test": "mocha",
-    "test:watch": "mocha --watch"
+    "test:watch": "mocha --watch",
+    "precommit": "npm run lint",
+    "prepush": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -51,6 +54,7 @@
     "gulp-watch": "^4.3.11",
     "gulp-zip": "^4.0.0",
     "gulplog": "^1.0.0",
+    "husky": "^0.14.3",
     "jsdom": "^11.3.0",
     "mocha": "^3.5.3",
     "node-notifier": "^5.1.2",
