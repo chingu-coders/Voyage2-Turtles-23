@@ -1,11 +1,16 @@
 @import 'variables';
 @import 'reset';
 @import 'layouts';
+// page components
 @import 'openclose';
+
+//Components/Widgets
 @import 'clock';
 @import 'greeting';
 @import 'search';
 @import 'quotes';
+@import 'todolist';
 
+//Windows
 @import 'links';
 @import 'options';
