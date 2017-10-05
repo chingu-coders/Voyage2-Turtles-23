@@ -1,0 +1,30 @@
+{
+    "manifest_version": 2,
+    "name": "next-tab",
+    "version": "0.1.1",
+
+    "description": "Chingu team Voyage project. Next tab extension",
+    "icons": {
+        "128": "icon128.png",
+        "48": "icon48.png",
+        "16": "icon16.png"
+    },
+
+    "chrome_url_overrides": {
+        "newtab": "nexttab.html"
+    },
+    "optional_permissions": [
+        "bookmarks",
+        "topSites"
+    ],
+    "permissions": [
+        "geolocation",
+        "unlimitedStorage",
+        "*://*.yahoapis.com/*",
+        "chrome://favicon/*"
+    ],
+    "background": {
+        "scripts": ["app.bundle.js"]
+    },
+    "content_security_policy": "script-src 'self' https://query.yahooapis.com/; object-src 'self'"
+}

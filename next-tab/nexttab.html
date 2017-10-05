@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>New Tab</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <section id="mainframe" class="container">
+            <section class="widgets-header">
+                <div class="clock">12:05 AM</div>
+                <div class="greeting">
+                    <strong>Good afternoon, UserName!!!</strong>
+                </div>
+            </section>
+            <main>
+                <div class="search">
+                    <form action="http://google.com/search">
+                        <input type="search" name="q" placeholder="Search request">
+                        <input type="submit" value="Go">
+                    </form>
+                </div>
+                <div id="most-visited">
+                    <div style="display: inline-block; box-shadow: 2px 2px 5px 5px rgba(0,0,0,.5); margin: 1%;">
+                        <img src="chrome://favicon/https://www.facebook.com" alt="" width="32" style="display: block; margin: 0 auto 1em">
+                        Facebook.com
+                    </div>
+                    <div style="display: inline-block; box-shadow: 2px 2px 5px 5px rgba(0,0,0,.5); margin: 1%;">
+                        <img src="chrome://favicon/https://www.google.com" alt="" width="32" style="display: block; margin: 0 auto 1em">
+                        Google.com
+                    </div>
+                    <div style="display: inline-block; box-shadow: 2px 2px 5px 5px rgba(0,0,0,.5); margin: 1%;">
+                        <img src="chrome://favicon/https://www.facebook.com" alt="" width="32" style="display: block; margin: 0 auto 1em">
+                        Facebook.com
+                    </div>
+                </div>
+            </main>
+            <div class="quote">
+                <div class="quote-body">Success is not final, failure is not fatal: it is the courage to continue that counts.</div>
+                <div class="quote-author">Winston Churchill</div>
+            </div>
+            <div id="weather"></div>
+            <a href="#todolist" data-action="open" data-target="#todolist">ToDo List</a>
+            <section id="todolist">
+                <span class="close" data-action="close" data-target="#todolist">x</span>
+                todoList will be HERE
+            </section>
+            <a href="#links" class="toggle-link" data-target="links">Links</a>
+            <a href="#options" class="toggle-options" data-target="options">Settings</a>
+        </section>
+        <div id="links" class="side">
+            <script type="template" id="links">
+            	<div>Links here</div>
+            	<ul>
+            	   <li><a href="http://localhost">localhost</a></li>
+            	</ul>
+            </script>
+        </div>
+        <div id="options" class="side">
+            	Main settings here
+        </div>
+        <script src="app.bundle.js"></script>
+    </body>
+</html>
