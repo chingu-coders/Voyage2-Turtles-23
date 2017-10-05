@@ -27,11 +27,20 @@ body {
     height: 100%;
     width: 50%;
     @extend %panel;
+    &.open {
+        left: 0;
+    }
+    transition: left .5s;
 }
 
 .panel {
     @extend %panel;
     position: relative;
+    transform: scale(1,0);
+    &.open {
+        transform: scale(1);
+    }
+    transition: transform .5s;
 }
 
 .widgets-header {
