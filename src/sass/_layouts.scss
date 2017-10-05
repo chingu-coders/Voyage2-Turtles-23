@@ -1,10 +1,11 @@
 body {
     font: 18px/1.5 $mainFont;
     padding: .5em;
+    height: 100vh;
 }
 .container {
     display: grid;
-    height: 100vh;
+    height: 100%;
     grid-template-columns: 15% 1fr 15%;
     grid-template-rows: 15% 1fr 15%;
     grid-column-gap: 1%;
