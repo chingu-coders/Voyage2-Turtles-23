@@ -8,14 +8,20 @@
     <body>
         <section id="mainframe" class="container">
             //= widgets.html
-            <a href="#links" class="toggle-link" data-target="links">Links</a>
-            <a href="#options" class="toggle-options" data-target="options">Settings</a>
+            <a href="#links" class="toggle-link" data-action="open" data-target="#links">Links</a>
+            <a href="#options" class="toggle-options" data-action="open" data-target="#options">Settings</a>
         </section>
         <div id="links" class="side">
-            //= links.html
+            <span class="close" data-action="close" data-target="#links"></span>
+            <div>
+                //= links.html
+            </div>
         </div>
         <div id="options" class="side">
-            //= options.html
+            <span class="close" data-action="close" data-target="#options"></span>
+            <div>
+                //= options.html
+            </div>
         </div>
         <script src="app.bundle.js"></script>
     </body>
