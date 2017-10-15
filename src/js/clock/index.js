@@ -1,18 +1,22 @@
-import $ from 'jquery';
-const jQuery = $;
-
 import ClockModel from './clockModel';
 import ClockPresenter from './clockPresenter';
 import ClockView from './clockView';
 
-const clock = (container, options) => {
-    const view = new CloclView(container);
-    const model = new ClockModel();
-    const presenter = new ClockPresenter(model, view);
-    presenter.init(options);
+const defaultOptions = {
+    show: false,
+    timeFormat: '12',
+    twoDigitHours: true,
+    /* subscribeTo: ,*/
+    templateFunc: (time) => `${time.hours}:${time.minutes} ${time.timeSuffix}`
+}
+
+const clockFactory = (container, options) => {
+    options = Object.assign({}, defaultOptions, options);
+    const view = new ClockView(container, options);
+    const model = new ClockModel(options);
+    const presenter = new ClockPresenter(model, view, options);
     
     return presenter;
 }
 
-export default clock;
-export {ClockModel, clock}
+export default clockFactory;
