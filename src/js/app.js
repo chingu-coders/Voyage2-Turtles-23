@@ -1,5 +1,7 @@
+import $ from 'jquery';
+
 import options from './options';
-//import clock from './clock/';
+import clockFactory from './clock/';
 import weather from './weather';
 import openclose from './openclose';
 
@@ -10,4 +12,9 @@ openclose();
 
 weather(options.get(weather));
 
-//clock($('#clock'), options);
+let clockOptions = {
+    show: true,
+    timeFormat: '12',
+};
+const clock = clockFactory($('.clock'), clockOptions);
+clock.run();
