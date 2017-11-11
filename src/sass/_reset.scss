@@ -1,0 +1,40 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+h1, h2, h3, p { margin: 0;}
+
+ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+form, fieldset {
+	margin: 0;
+	padding: 0;
+	border-style: none;
+}
+
+img {
+	border-style: none;
+	display: block;
+}
+
+input, select, textarea {
+	vertical-align: middle;
+	font: 100%;
+    outline: none;
+}
+
+a {
+	color: #f00;
+	text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
